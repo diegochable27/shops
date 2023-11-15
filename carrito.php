@@ -112,7 +112,6 @@
                         <div class="d-flex flex-row align-items-center">
                             <h4 class="mr-1"><?php
                                                 $_SESSION["total"] = $_SESSION["total"] + $iva;
-                                                $preciototal = $_SESSION["total"] + $iva;
                                                 echo "$" . $_SESSION["total"]
                                                 ?></h4>
                         </div>
@@ -129,7 +128,7 @@
                                         return actions.order.create({
                                             purchase_units: [{
                                                 amount: {
-                                                    value: '<?php echo $preciototal  ?>'
+                                                    value: '<?php echo $preciototal ?>'
                                                 }
                                             }]
                                         });
