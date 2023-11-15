@@ -1,4 +1,4 @@
-h<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,10 +17,10 @@ h<!DOCTYPE html>
     <?php
     session_start();
     include_once "./public/navbar/navbar.php";
-        $idProductos = $_GET['id'];
+    $idProductos = $_GET['id'];
     ?>
-    
-  
+
+
     <?php include_once "./public/footer/footer.php"; ?>
 </body>
 
