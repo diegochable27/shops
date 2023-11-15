@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link href="./styles/navbarestilos.css">
+    <link href="./styles/buscador.css">
     <title>Fancy Store</title>
 </head>
 
@@ -19,18 +20,17 @@
     include_once "./public/navbar/navbar.php";
     ?>
     <br>
-    <div>
-        <header class="jumbotron jumbotron-fluid">
-            <div class="container text-center">
-                <?php
-                if (isset($_SESSION['nombre'])) {
-                    $nombre = $_SESSION['nombre'];
-                    $apellidos = $_SESSION['apellidos'];
-                    echo '<h1 class="display-4">¡Bienvenido ' . $nombre . '!</h1>';
-                } else {
-                    echo '<h1 class="display-4">¡Bienvenido!</h1>';
-                }
-                ?>
+    <header class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <?php
+            if (isset($_SESSION['nombre'])) {
+                $nombre = $_SESSION['nombre'];
+                $apellidos = $_SESSION['apellidos'];
+                echo '<h1 class="display-4">¡Bienvenido ' . $nombre . '!</h1>';
+            } else {
+                echo '<h1 class="display-4">¡Bienvenido!</h1>';
+            }
+            ?>
 
                 <p class="lead">Donde encontrarás una gran variedad de productos a los mejores precios.</p>
                 <a href="#" class="btn btn-warning btn-lg">Explora más</a>
@@ -114,13 +114,10 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
-        
-    </div>
-    
-
-    <script src="./js/buscador.js"></script>
+        </div>
+    </section>
+    <br>
+    <script src="./js/buscador.js"></script>        
     <?php include_once "./public/footer/footer.php"; ?>
 
 </body>
