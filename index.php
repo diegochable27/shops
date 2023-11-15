@@ -20,6 +20,7 @@
     include_once "./public/navbar/navbar.php";
     ?>
     <br>
+    <div class="cuerpo" id="cuerpo">
     <header class="jumbotron jumbotron-fluid">
         <div class="container text-center">
             <?php
@@ -31,7 +32,6 @@
                 echo '<h1 class="display-4">¡Bienvenido!</h1>';
             }
             ?>
-
                 <p class="lead">Donde encontrarás una gran variedad de productos a los mejores precios.</p>
                 <a href="#" class="btn btn-warning btn-lg">Explora más</a>
             </div>
@@ -116,6 +116,10 @@
 
         </div>
     </section>
+    </div>
+    <div class="resultados" id="resultados">
+        <div id="resultadosBusqueda"></div>
+    </div>
     <br>
     <script src="./js/buscador.js"></script>        
     <?php include_once "./public/footer/footer.php"; ?>
