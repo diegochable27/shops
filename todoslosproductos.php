@@ -30,7 +30,7 @@
 
             $sql = "SELECT * FROM Productos";
             $result = mysqli_query($conexion, $sql);
-            if( mysqli_num_rows($result) == 0){
+            if (mysqli_num_rows($result) == 0) {
                 echo '<div class="alert alert-danger" role="alert">
                 No hay productos disponibles
               </div>';
@@ -50,23 +50,23 @@
                 $rowfotos = mysqli_fetch_array($resultfotos);
                 $foto = $rowfotos['ruta_imagen'];
                 $precio = $row['precio'];
-                if($row["cantidad"] >= 0){
-                    
-                
-                
+                if ($row["cantidad"] >= 0) {
+
+
+
             ?>
 
-                <div class="col-lg-4 col-md-6 col-sm-12" style="width: 400px;">
-                    <?php
-                        echo '<a href="./vistadeproducto.php?id='.$idproducto.'" class="text-decoration-none">';
-                    ?>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="width: 400px;">
+                        <?php
+                        echo '<a href="./vistadeproducto.php?id=' . $idproducto . '" class="text-decoration-none">';
+                        ?>
                         <div class="card mb-3">
                             <div class="position-relative">
-                            <?php echo '<img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="'.$foto.'" alt="Nombre del Producto">'?>
+                                <?php echo '<img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="' . $foto . '" alt="Nombre del Producto">' ?>
                                 <div class="position-absolute top-0 end-0 m-2">
                                     <form action="./todoslosproductos.php">
-                                        <button type="button" class="btn btn-outline-secondary" name=<?php  echo "favorito" . $idproducto ?> ><i class="far fa-heart"></i></button>
-                                        <button type="submit" class="btn btn-outline-secondary ms-2" name=<?php  echo "carrito" . $idproducto ?> ><i class="fas fa-shopping-cart"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary" name=<?php echo "favorito" . $idproducto ?>><i class="far fa-heart"></i></button>
+                                        <button type="submit" class="btn btn-outline-secondary ms-2" name=<?php echo "carrito" . $idproducto ?>><i class="fas fa-shopping-cart"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -76,30 +76,45 @@
                                 <h5 class="card-text text-decoration-none text-primary">$<?php echo $precio ?></h5>
                             </div>
                         </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
 
             <?php
-                if(isset($_GET["carrito" . $idproducto])){
-                    $sqlcarrito = "INSERT INTO carrito (id_product, id_usuario, precio) VALUES ('$idproducto', '$_SESSION[id]', '$precio')";
-                    $resultcarrito = mysqli_query($conexion, $sqlcarrito);
-                    if($resultcarrito){
-                        echo '<script>alert("Producto agregado al carrito")</script>';
+                    if (isset($_GET["carrito" . $idproducto])) {
+                        //si el carrito ya tiene el producto, solo aumentar la cantidad
+                        $sql2 = "SELECT * FROM carrito WHERE id_product = '$idproducto' AND id_usuario = '$_SESSION[id]'";
+                        $result2 = mysqli_query($conexion, $sql2);
+                        $row2 = mysqli_fetch_array($result2);
+                        if ($row2['id_product'] == $idproducto) {
+                            $cantidad2 = $row2['cantidad'];
+                            $cantidad2 = $cantidad2 + 1;
+                            $sql3 = "UPDATE carrito SET cantidad = '$cantidad2' WHERE id_product = '$idproducto' AND id_usuario = '$_SESSION[id]'";
+                            $result3 = mysqli_query($conexion, $sql3);
+                            if ($result3) {
+                                echo '<script>alert("Producto agregado al carrito")</script>';
+                            }
+                        } else {
+
+
+                            $sqlcarrito = "INSERT INTO carrito (id_product, id_usuario, precio, cantidad) VALUES ('$idproducto', '$_SESSION[id]', '$precio', 1)";
+                            $resultcarrito = mysqli_query($conexion, $sqlcarrito);
+                            if ($resultcarrito) {
+                                echo '<script>alert("Producto agregado al carrito")</script>';
+                            }
+                        }
+                    }
+
+                    if (isset($_GET["favorito" . $idproducto])) {
+                        $sqlfavorito = "INSERT INTO favoritos (id_product, id_usuario) VALUES ('$idproducto', '$_SESSION[id]')";
+                        $resultfavorito = mysqli_query($conexion, $sqlfavorito);
+
+                        if ($resultfavorito) {
+                            echo '<script>alert("Producto agregado a favoritos")</script>';
+                        } else {
+                            echo '<script>alert("Error al agregar el producto a favoritos")</script>';
+                        }
                     }
                 }
-
-                if(isset($_GET["favorito" . $idproducto])){
-                    $sqlfavorito = "INSERT INTO favoritos (id_product, id_usuario) VALUES ('$idproducto', '$_SESSION[id]')";
-                    $resultfavorito = mysqli_query($conexion, $sqlfavorito);
-
-                    if($resultfavorito){
-                        echo '<script>alert("Producto agregado a favoritos")</script>';
-                    }else{
-                        echo '<script>alert("Error al agregar el producto a favoritos")</script>';
-                                            
-                    }
-                }
-            }
             }
             ?>
 

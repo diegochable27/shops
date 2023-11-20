@@ -50,6 +50,7 @@
                     $foto = $rowfotos['ruta_imagen'];
                     $preciototal = $_SESSION["total"] + $precio;
                     $_SESSION["total"] = $_SESSION["total"] + $precio;
+                    $cantidad = $row['cantidad'];
 
 
                 ?>
@@ -72,9 +73,23 @@
                                 <h4 class="mr-1"><?php echo "$" . $precio ?></h4>
                             </div>
                             <h6 class="text-success">Envio Gratis</h6>
+                            <h6 class="">Cantidad: <?php echo $cantidad ?> </h6>
+
                             <div class="d-flex flex-column mt-4">
                                 <form action="./carrito.php">
-                                    <button 7 class="btn btn-danger btn-sm" type="submit" name=<?php echo "eliminar" . $idtodo ?>>Eliminar</button>
+                                    <select name="cantidad" class="form-select" id="cantidad">
+                                        <?php
+                                        for ($i = 1; $i <= $cantidad; $i++) {
+                                            if($cantidad == $i){
+                                                echo '<option value="' . $i . '" selected>' . $i . '</option>';
+                                            }else{
+                                                echo '<option value="' . $i . '">' . $i . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <button class="btn btn-danger btn-sm" type="submit" name=<?php echo "eliminar" . $idtodo ?>>Eliminar</button>
 
                                 </form>
                             </div>
