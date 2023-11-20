@@ -30,6 +30,11 @@
 
             $sql = "SELECT * FROM Productos";
             $result = mysqli_query($conexion, $sql);
+            if( mysqli_num_rows($result) == 0){
+                echo '<div class="alert alert-danger" role="alert">
+                No hay productos disponibles
+              </div>';
+            }
 
             while ($row = mysqli_fetch_array($result)) {
                 $nombre = $row['nombre'];
@@ -45,6 +50,9 @@
                 $rowfotos = mysqli_fetch_array($resultfotos);
                 $foto = $rowfotos['ruta_imagen'];
                 $precio = $row['precio'];
+                if($row["cantidad"] >= 0){
+                    
+                
                 
             ?>
 
@@ -92,10 +100,7 @@
                     }
                 }
             }
-
-
-                
-
+            }
             ?>
 
         </div>

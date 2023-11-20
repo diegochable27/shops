@@ -75,7 +75,6 @@
                         <div class="mb-3">
                             <label class="form-label" for="inlineFormCustomSelectPref">Categoria</label>
                             <select class="form-select" name="Categoria" id="inlineFormCustomSelectPref" required>
-                                <option selected>Categorias...</option>
                                 <?php
 
                                 $sql = "SELECT * FROM categoria";

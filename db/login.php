@@ -5,8 +5,8 @@ session_start();
 $correo = $_POST['correo'];
 $contrasena = $_POST['contrasena'];
 
-$consulta = "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$contrasena'";
-$resultado = mysqli_query($conexion, $consulta);
+$query = "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$contrasena'";
+$resultado = mysqli_query($conexion, $query);
 $row = mysqli_fetch_array($resultado);
 
 if ($row['correo'] == $correo && $row['contrasena'] == $contrasena) {

@@ -34,7 +34,7 @@
                 <div class="input-group">
                     <span class="border-warning input-group-text bg-warning text-white"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control border-warning" style="color:#7a7a7a">
-                    <button class="btn btn-warning text-white"  >Buscar</button>
+                    <button class="btn btn-warning text-white" onclick=buscartdos() >Buscar</button>
                 </div>
             </form>
         </div>
@@ -66,9 +66,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-2 text-uppercase" href="http://localhost/shops/todoslosproductos.php">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2 text-uppercase" href="#">Categorias</a>
                 </li>
                 <?php if (isset($_SESSION['correo'])) { ?>
                     <li class="nav-item">

@@ -70,6 +70,11 @@
                     $sql = "SELECT * FROM Productos WHERE id_Vendedor = '$id'";
                     $result = mysqli_query($conexion, $sql);
                 }
+                if (mysqli_num_rows($result) == 0) {
+                    echo '<div class="alert alert-danger" role="alert">
+                    No hay productos disponibles
+                  </div>';
+                }
 
                 while ($row = mysqli_fetch_array($result)) {
                     $idpro = $row['id_producto'];
@@ -87,21 +92,13 @@
                     if (strlen($descripcion) > 50) {
                         $descripcion = substr($descripcion, 0, 50) . "...";
                     }
-                    echo "<tr>";
-                    echo "<td>$idpro</td>";
-                    echo "<td>$nombre</td>";
-                    echo "<td>$descripcion</td>";
-                    echo "<td>$categoria</td>";
-                    echo "<td>$cantidad</td>";
-                    echo "<td>$precio</td>";
-                    echo "<td class='justify-content-between'>";
-                    // Que envíe el id del producto y del dueño
-                    echo "<a href='./editarproductos.php?id=$idpro' class='btn btn-warning'>Editar</a>";
+                   
+                    
 
                         $sqlcategoria = "SELECT * FROM categoria WHERE id_categoria = '$categoria'";
                         $resultcategoria = mysqli_query($conexion, $sqlcategoria);
                         $rowcategoria = mysqli_fetch_array($resultcategoria);
-                        $categoria = $rowcategoria['nombre'];
+
 
                         if(strlen($descripcion) > 50){
                             $descripcion = substr($descripcion, 0, 50) . "...";
@@ -123,6 +120,7 @@
                 ?>
             </tbody>
         </table>
+        <br>
     </div>
 
 
