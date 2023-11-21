@@ -35,6 +35,11 @@
                 $result = mysqli_query($conexion, $sql);
                 $carritototal = $result->num_rows;
                 $_SESSION["Carritototal"] = $carritototal;
+                if($carritototal == 0){
+                    echo '<div class="alert alert-danger" role="alert">
+                    No hay productos en el carrito
+                  </div>';
+                }
                 while ($row = mysqli_fetch_array($result)) {
                     $idtodo = $row['id'];
                     $idproducto = $row['id_product'];
@@ -51,6 +56,7 @@
                     $preciototal = $_SESSION["total"] + $precio;
                     $_SESSION["total"] = $_SESSION["total"] + $precio;
                     $cantidad = $row['cantidad'];
+                    $_SESSION["total"] = $_SESSION["total"] * $cantidad;
 
 
                 ?>
@@ -76,7 +82,8 @@
                             <h6 class="">Cantidad: <?php echo $cantidad ?> </h6>
 
                             <div class="d-flex flex-column mt-4">
-                                <form action="./carrito.php">
+                                <form action="./db/eliminarCarrito.php" method="post">
+                                    <input type="text" name="id" id="id" class="d-none" value=<?php echo $idtodo ?> >
                                     <select name="cantidad" class="form-select" id="cantidad">
                                         <?php
                                         for ($i = 1; $i <= $cantidad; $i++) {
@@ -100,15 +107,7 @@
                 <?php
 
                     if (isset($_GET["eliminar" . $idtodo])) {
-                        $sqleliminar = "DELETE FROM carrito WHERE id = '$idtodo'";
-                        $resulteliminar = mysqli_query($conexion, $sqleliminar);
-
-                        if ($result) {
-                            echo '<script>alert("Producto eliminado del carrito")</script>';
-                            echo '<script>window.location="./carrito.php"</script>';
-                        } else {
-                            echo '<script>alert("Error al eliminar el producto")</script>';
-                        }
+                        echo "elimano";
                     }
                 }
                 ?>
@@ -153,6 +152,8 @@
                                         return actions.order.capture().then(function(details) {
                                             // Show a success message to the buyer
                                             alert('Transaction completed by ' + details.payer.name.given_name);
+                                            //ir a la pagina de compras
+                                            window.location = "./db/comprascompleta.php";
                                         });
                                     }
                                 }).render('#paypal-button-container'); // Display the button on the page
