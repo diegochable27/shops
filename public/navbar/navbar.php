@@ -72,7 +72,7 @@
                         <a class="nav-link mx-2 text-uppercase" href="#">Favoritos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-2 text-uppercase" href="#">Mis compras</a>
+                        <a class="nav-link mx-2 text-uppercase" href="./misCompras.php">Mis compras</a>
                     </li>
                     <?php if ($_SESSION['rol'] == 1) { ?>
                         <li class="nav-item me-3 me-lg-0 dropdown">

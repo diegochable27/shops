@@ -19,7 +19,12 @@
     session_start();
     include_once "./public/navbar/navbar.php";
     $id = $_GET['id'];
-    $iduser = $_SESSION["id"];
+    if(isset($_SESSION["id"])){
+        $iduser = $_SESSION["id"];
+    }else{
+        $iduser = "0";
+    }
+   
     include("./db/Conexion.php");
 
     $sql = "SELECT * FROM productos WHERE id_producto  = $id";
