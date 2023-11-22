@@ -117,13 +117,43 @@
         </div>
     </section>
     </div>
-    <div class="resultados" id="resultados">
+    <style>
+    .resultados {
+        background-color: orange;
+        width: 500px;
+        height: auto;
+        padding: 20px; 
+        margin: 50px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    }
+
+    .resultados h2 {
+        margin-bottom: 10px;
+        color: #fff; 
+        text-align: center;
+    }
+
+    .resultados ul {
+        list-style: none; 
+        padding: 0;
+    }
+
+    .resultados li {
+        margin-bottom: 8px;
+        color: #fff;
+        font-size: 16px;
+    }
+</style>
+
+    <div class="resultados text-left" id="resultados">
         <div id="resultadosBusqueda"></div>
     </div>
     <br>
+    
     <script src="./js/buscador.js"></script>        
     <?php include_once "./public/footer/footer.php"; ?>
-
+    
 </body>
 
 </html>
