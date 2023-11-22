@@ -7,7 +7,7 @@
     $result = mysqli_query($conexion, $sql);
 
     if($result){
-        header("Location: ../productos.php");
+        header("Location: ./productos.php");
     }else{
         echo "Error al eliminar el producto";
     }

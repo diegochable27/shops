@@ -70,6 +70,11 @@
                     $sql = "SELECT * FROM Productos WHERE id_Vendedor = '$id'";
                     $result = mysqli_query($conexion, $sql);
                 }
+                if (mysqli_num_rows($result) == 0) {
+                    echo '<div class="alert alert-danger" role="alert">
+                    No hay productos disponibles
+                  </div>';
+                }
 
                 while ($row = mysqli_fetch_array($result)) {
                     $idpro = $row['id_producto'];
@@ -88,6 +93,16 @@
                         $descripcion = substr($descripcion, 0, 50) . "...";
                     }
                    
+<<<<<<< HEAD
+=======
+                    
+
+                        $sqlcategoria = "SELECT * FROM categoria WHERE id_categoria = '$categoria'";
+                        $resultcategoria = mysqli_query($conexion, $sqlcategoria);
+                        $rowcategoria = mysqli_fetch_array($resultcategoria);
+
+
+>>>>>>> e06d3f78abed301ee498603d3f1e12e3dc71fd79
                         if(strlen($descripcion) > 50){
                             $descripcion = substr($descripcion, 0, 50) . "...";
                         }
@@ -108,6 +123,7 @@
                 ?>
             </tbody>
         </table>
+        <br>
     </div>
 
 

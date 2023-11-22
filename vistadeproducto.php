@@ -19,7 +19,12 @@
     session_start();
     include_once "./public/navbar/navbar.php";
     $id = $_GET['id'];
-    $iduser = $_SESSION["id"];
+    if(isset($_SESSION["id"])){
+        $iduser = $_SESSION["id"];
+    }else{
+        $iduser = "0";
+    }
+   
     include("./db/Conexion.php");
 
     $sql = "SELECT * FROM productos WHERE id_producto  = $id";
@@ -28,6 +33,7 @@
     $row = mysqli_fetch_array($result);
     $nombre = $row['nombre'];
     $precio = $row['precio'];
+    $cantidad = $row['cantidad'];
     $descripcion = $row['descripcion'];
     $sqlimage = "SELECT * FROM imagenes WHERE propietario = '$nombre'";
     $resultimg = mysqli_query($conexion, $sqlimage);
@@ -56,41 +62,48 @@
                 <div class="col-md-8 col-xs-12">
                     <div> <!-- Agregamos una clase 'card' para crear un cuadro -->
                         <div class="card-body"> <!-- Contenido del cuadro -->
-                            <form action="#" method="post" class="form">
-                                <h2>
-                                    <?php echo $nombre ?>
-                                </h2>
-                                <br>
-                                <p class="lead">
-                                    <strong class="text-primary">$
-                                        <?php echo $precio ?>
-                                    </strong>
-                                </p>
-                                <br>
-                                <p class="lead">
-                                    <?php echo $descripcion ?>
-                                </p>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-8">
+
+                            <h2>
+                                <?php echo $nombre ?>
+                            </h2>
+                            <br>
+                            <p class="lead">
+                                <strong class="text-primary">$
+                                    <?php echo $precio ?>
+                                </strong>
+                            </p>
+                            <br>
+                            <p class="lead">
+                                <?php echo $descripcion ?>
+                            </p>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <form action="./db/guardarcarrito.php" method="post">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="1">
+                                                    <input type="text" class="d-none" name="id" id="id" value=<?php echo $id ?>>
+                                                    <select name="cantidad" class="form-select" id="cantidad">
+                                                        <?php
+                                                        for ($i = 1; $i <= $cantidad; $i++) {
+                                                            echo '<option value="' . $i . '">' . $i . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <!-- <form action="./todoslosproductos.php">                            
-                                                    <button type="submit" class="btn btn-primary btn-block" name= >Añadir al carrito</button>
-                                                </form> -->
-                                                <?php
-                                                echo '<a href="./db/guardarcarrito.php?id='. $id . '" class="btn btn-primary btn-block">';?>Añadir al carrito</a>
-
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn btn-primary btn-block" value="Agregar al Carrito" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </div>
-                            </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
